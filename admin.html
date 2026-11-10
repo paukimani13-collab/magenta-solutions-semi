@@ -28,30 +28,35 @@
 
   <main class="section" style="padding-top:20px;">
     <div class="container">
-      <section class="admin-panel">
-        <h2>Connect to inventory</h2>
-        <p class="photo-guidance">Configure Supabase in js/api-config.js for the hosted store. For local use, start the Node.js backend and open this page at http://127.0.0.1:3000/admin.html; leave the API URL blank so the site and API share one origin. The URL override is saved only in this browser.</p>
+      <section class="admin-panel admin-access-panel">
+        <h2>Store admin access</h2>
+        <p class="photo-guidance">Sign in to publish products, change photos or stock status, and remove products. Changes are saved to the store catalogue.</p>
         <div class="form-group">
-          <label for="api-url">API or Supabase project URL</label>
-          <div class="form-row">
-            <input id="api-url" type="url" placeholder="https://your-api.example.com" autocomplete="url">
-            <button id="save-api-url" class="btn btn-outline btn-sm" type="button">Save API URL</button>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="admin-token">Admin token</label>
+          <label for="admin-token">Private admin token</label>
           <div class="form-row">
             <input id="admin-token" type="password" autocomplete="current-password" required>
-            <button id="unlock-admin" class="btn btn-primary btn-sm" type="button">Unlock</button>
+            <button id="unlock-admin" class="btn btn-primary btn-sm" type="button">Sign in</button>
             <button id="lock-admin" class="btn btn-outline btn-sm" type="button" hidden>Lock</button>
           </div>
         </div>
-        <p class="photo-guidance">Your admin token is kept in memory only. Product photos must be JPEG, PNG, or WebP and 5 MB or smaller.</p>
+        <details class="admin-connection-settings">
+          <summary>Advanced connection settings</summary>
+          <p class="photo-guidance">Only change this if you are connecting to a different API. The default Supabase connection is already configured.</p>
+          <div class="form-group">
+            <label for="api-url">API or Supabase project URL</label>
+            <div class="form-row">
+              <input id="api-url" type="url" placeholder="https://your-api.example.com" autocomplete="url">
+              <button id="save-api-url" class="btn btn-outline btn-sm" type="button">Save API URL</button>
+            </div>
+          </div>
+        </details>
+        <p class="photo-guidance">Your token stays in this browser session. Choose product photos from your device (JPEG, PNG, or WebP up to 5 MB).</p>
         <p id="admin-status" class="photo-guidance" role="status" aria-live="polite">Connect to the API to load inventory.</p>
       </section>
 
       <section id="stock-controls" class="admin-panel" hidden>
-        <h2>Add or edit products</h2>
+        <h2 id="stock-form-title">Quick post to store</h2>
+        <p class="photo-guidance">Add the product details, choose a photo, and set how customers should see its stock status.</p>
         <form id="stock-form" enctype="multipart/form-data">
           <div class="form-row">
             <div class="form-group"><label for="product-name">Product name *</label><input id="product-name" type="text" name="name" maxlength="120" required></div>
@@ -68,18 +73,33 @@
           </div>
           <div class="form-group"><label for="product-description">Product details</label><textarea id="product-description" name="description" maxlength="1000" rows="3" placeholder="Additional condition, included accessories, warranty, or other helpful details"></textarea></div>
           <div class="form-row">
-            <div class="form-group"><label for="product-badge">Badge</label><input id="product-badge" type="text" name="badge" maxlength="40" placeholder="Ex-UK / New"></div>
-            <div class="form-group"><label for="product-in-stock">Availability *</label>
-              <select id="product-in-stock" name="inStock" required>
-                <option value="true">In stock</option>
-                <option value="false">Out of stock</option>
+            <div class="form-group"><label for="product-stock-status">Store status *</label>
+              <select id="product-stock-status" name="stockStatus" required>
+                <option value="new-stock">New stock</option>
+                <option value="in-stock">In stock</option>
+                <option value="out-of-stock">Out of stock</option>
               </select>
             </div>
+            <div class="form-group"><label for="product-badge">Extra photo label (optional)</label><input id="product-badge" type="text" name="badge" maxlength="40" placeholder="Popular, Ex-UK, Sale"></div>
           </div>
-          <div class="form-group"><label for="product-image">Product photo <span id="product-image-required">*</span></label><input id="product-image" type="file" name="image" accept="image/jpeg,image/png,image/webp" required></div>
+          <div class="form-group">
+            <label for="product-image">Product photo <span id="product-image-required">*</span></label>
+            <label class="product-image-picker" for="product-image">
+              <span class="product-image-picker-title">Choose a photo from your device</span>
+              <span class="product-image-picker-help">Tap to browse your photos or files. On phones, your photo chooser may also offer the camera.</span>
+              <input id="product-image" type="file" name="image" accept="image/jpeg,image/png,image/webp" required>
+            </label>
+            <div id="product-image-preview" class="product-image-preview" hidden>
+              <img id="product-image-preview-img" alt="Selected product photo preview">
+              <div>
+                <p id="product-image-preview-label"></p>
+                <button id="clear-product-image" class="btn btn-outline btn-sm" type="button">Remove selected photo</button>
+              </div>
+            </div>
+          </div>
           <div class="stock-management-controls">
-            <button id="stock-submit" class="btn btn-primary btn-sm" type="submit">Post product</button>
-            <button id="cancel-edit" class="btn btn-outline btn-sm" type="button" hidden>Cancel edit</button>
+            <button id="stock-submit" class="btn btn-primary btn-sm" type="submit">Publish to store</button>
+            <button id="cancel-edit" class="btn btn-outline btn-sm" type="button" hidden>Cancel editing</button>
           </div>
         </form>
       </section>

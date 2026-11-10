@@ -32,6 +32,12 @@ The website can use Supabase Postgres for products, Supabase Storage for product
 
 The database migration seeds the sample products from `backend/data/products.json`, without photos. After deployment, upload product photos from the admin page; they are stored in the public `product-images` bucket. Public product reads and photo reads are intentionally enabled. Product writes are handled only by the Edge Function and require the admin token. Direct table access is blocked by row-level security.
 
+## Post and manage products
+
+Open the site's [stock management page](../admin.html) and enter the private `ADMIN_TOKEN`. To publish a product, choose a photo from your device, enter its name, price, specifications, and category, then choose **New stock**, **In stock**, or **Out of stock**. Publishing uploads the photo to Supabase Storage and saves the product in Supabase Postgres; the public store reads from that catalogue. New stock is marked with a `New Stock` photo badge, and out-of-stock products remain visible but cannot be added to the cart. Use **Edit details**, **Change photo**, or **Remove from store** on a catalogue card to manage existing listings.
+
+The admin token is only held in the browser's memory while the admin page is open. Never put it in `js/api-config.js`, commit it, or share it publicly.
+
 To load different initial products, update the insert rows in `supabase/migrations/20261110090000_inventory.sql` before applying the migration. Database migrations that have already been applied should not be edited; create a new migration for later data changes.
 
 ## Run the Node.js backend locally
@@ -70,7 +76,7 @@ GitHub Pages is static hosting: it cannot run `backend/server.js`, protect write
 
 ## API
 
-Product postings may include an optional `brand` field; the store uses it for brand filtering and can infer common brands from existing product names.
+Product postings may include an optional `brand` field; the store uses it for brand filtering and can infer common brands from existing product names. The admin form sends `stockStatus` as `new-stock`, `in-stock`, or `out-of-stock`; the function stores the selected availability and marks new stock with a `New Stock` badge. The older `inStock` field remains supported.
 
 - `GET /api/products` returns the public product catalogue.
 - `POST /api/products` accepts multipart form fields `name`, `brand`, `specs`, optional `description`, `price`, `category`, `badge`, `inStock` (`true` or `false`), and required `image`; requires `Authorization: Bearer <ADMIN_TOKEN>`. New products can be published as out of stock.

@@ -83,6 +83,7 @@ async function requireAdmin(request: Request): Promise<boolean> {
 }
 
 function toProduct(row: Record<string, unknown>): Record<string, unknown> {
+  const isNewStock = String(row.badge ?? "").trim().toLowerCase() === "new stock";
   return {
     id: row.id,
     name: row.name,
@@ -94,6 +95,7 @@ function toProduct(row: Record<string, unknown>): Record<string, unknown> {
     badge: row.badge,
     imageUrl: row.image_url,
     inStock: row.in_stock,
+    stockStatus: row.in_stock === false ? "out-of-stock" : isNewStock ? "new-stock" : "in-stock",
   };
 }
 
@@ -106,6 +108,7 @@ function parseProduct(form: FormData, existing?: Record<string, unknown>) {
   const category = form.get("category");
   const badge = form.get("badge") ?? "";
   const inStockValue = form.get("inStock");
+  const stockStatus = form.get("stockStatus");
   const imageField = form.get("image");
   const image = imageField instanceof File && imageField.size > 0 ? imageField : null;
 
@@ -130,7 +133,18 @@ function parseProduct(form: FormData, existing?: Record<string, unknown>) {
   if (typeof badge !== "string" || badge.length > 40) {
     return { error: "Badge must be 40 characters or fewer." };
   }
-  if (inStockValue !== null && inStockValue !== "true" && inStockValue !== "false") {
+  if (
+    stockStatus !== null &&
+    (typeof stockStatus !== "string" || !["new-stock", "in-stock", "out-of-stock"].includes(stockStatus))
+  ) {
+    return { error: "Choose new stock, in stock, or out of stock." };
+  }
+  if (
+    stockStatus === null &&
+    inStockValue !== null &&
+    inStockValue !== "true" &&
+    inStockValue !== "false"
+  ) {
     return { error: "Choose whether this product is in stock." };
   }
   if (!existing && !image) return { error: "A product photo is required." };
@@ -147,8 +161,12 @@ function parseProduct(form: FormData, existing?: Record<string, unknown>) {
       description: description.trim(),
       price,
       category,
-      badge: badge.trim(),
-      in_stock: inStockValue === null ? existing?.in_stock ?? true : inStockValue === "true",
+      badge: stockStatus === "new-stock" ? "New Stock" : badge.trim(),
+      in_stock: stockStatus !== null
+        ? stockStatus !== "out-of-stock"
+        : inStockValue === null
+        ? existing?.in_stock ?? true
+        : inStockValue === "true",
     },
   };
 }
