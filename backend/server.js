@@ -123,7 +123,19 @@ function validateProduct(req, existingProduct) {
     return { error: 'Badge must be 40 characters or fewer.' };
   }
   const inStockValue = req.body.inStock;
-  if (inStockValue !== undefined && inStockValue !== 'true' && inStockValue !== 'false') {
+  const stockStatus = req.body.stockStatus;
+  if (
+    stockStatus !== undefined &&
+    !['new-stock', 'in-stock', 'out-of-stock'].includes(stockStatus)
+  ) {
+    return { error: 'Choose new stock, in stock, or out of stock.' };
+  }
+  if (
+    stockStatus === undefined &&
+    inStockValue !== undefined &&
+    inStockValue !== 'true' &&
+    inStockValue !== 'false'
+  ) {
     return { error: 'Choose whether this product is in stock.' };
   }
   if (!existingProduct && !req.file) {
@@ -138,9 +150,20 @@ function validateProduct(req, existingProduct) {
       description: description.trim(),
       price: parsedPrice,
       category,
-      badge: badge.trim(),
+      badge: stockStatus === 'new-stock' ? 'New Stock' : badge.trim(),
       imageUrl: req.file ? `/uploads/${req.file.filename}` : (existingProduct?.imageUrl || ''),
-      inStock: inStockValue === undefined ? (existingProduct?.inStock ?? true) : inStockValue === 'true',
+      inStock: stockStatus !== undefined
+        ? stockStatus !== 'out-of-stock'
+        : inStockValue === undefined
+        ? (existingProduct?.inStock ?? true)
+        : inStockValue === 'true',
+      stockStatus: stockStatus || (
+        inStockValue !== undefined
+          ? inStockValue === 'false' ? 'out-of-stock' : 'in-stock'
+          : existingProduct?.stockStatus || (
+            String(badge).trim().toLowerCase() === 'new stock' ? 'new-stock' : 'in-stock'
+          )
+      ),
     },
   };
 }
@@ -348,6 +371,11 @@ async function start() {
       product.category === 'desktop' ? 'all-in-ones' :
       product.category === 'accessory' ? 'accessories' : product.category,
     inStock: product.inStock !== false,
+    stockStatus: product.inStock === false
+      ? 'out-of-stock'
+      : String(product.badge || '').trim().toLowerCase() === 'new stock'
+      ? 'new-stock'
+      : 'in-stock',
   }));
   app.listen(PORT, HOST, () => console.log(`Magenta inventory API is running at http://${HOST}:${PORT}`));
 }

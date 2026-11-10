@@ -915,6 +915,9 @@ textarea {
 }
 
 .hero-photo-placeholder {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
   margin-bottom: 18px;
   border-radius: 18px;
 }
@@ -1010,7 +1013,11 @@ button[hidden] {
 }
 
 .blog-img {
+  display: block;
+  width: 100%;
+  height: 190px;
   min-height: 130px;
+  object-fit: cover;
 }
 
 .blog-body {
@@ -1187,6 +1194,14 @@ button[hidden] {
   color: var(--magenta-light);
   font-size: 0.65rem;
   font-weight: 800;
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+
+.cart-item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .whatsapp-float {
@@ -1223,6 +1238,31 @@ button[hidden] {
 .cart-item-info h4 {
   margin: 0 0 5px;
   font-size: 0.96rem;
+  overflow-wrap: anywhere;
+}
+
+.cart-item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  color: var(--text-muted);
+}
+
+.cart-quantity-btn {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.cart-quantity-btn:hover {
+  border-color: var(--magenta-light);
 }
 
 .cart-item-remove {

@@ -21,7 +21,7 @@
       </nav>
       <div style="display:flex;align-items:center;gap:8px;">
         <button class="cart-btn" aria-label="Open cart"><svg class="cart-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 1.9-1.4L22 9H6"/><circle cx="10" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg><span class="cart-count" style="display:none">0</span></button>
-        <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
       </div>
     </div>
   </header>
@@ -113,17 +113,17 @@
   <section class="section booking-section" id="booking">
     <div class="container">
       <h2 class="section-title">Book a Repair / Service</h2>
-      <p class="section-subtitle">We will confirm by call or WhatsApp.</p>
+      <p class="section-subtitle">Your details open in WhatsApp so you can send your request. We will confirm by call or WhatsApp.</p>
       <div class="booking-form">
         <form onsubmit="handleBookingSubmit(event)">
           <div class="form-row">
-            <div class="form-group"><label>Full Name *</label><input type="text" name="name" required placeholder="John Kamau"></div>
-            <div class="form-group"><label>Phone Number *</label><input type="tel" name="phone" required placeholder="07XX XXX XXX"></div>
+            <div class="form-group"><label for="booking-name">Full Name *</label><input id="booking-name" type="text" name="name" autocomplete="name" required placeholder="John Kamau"></div>
+            <div class="form-group"><label for="booking-phone">Phone Number *</label><input id="booking-phone" type="tel" name="phone" autocomplete="tel" required placeholder="07XX XXX XXX"></div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label>Email (optional)</label><input type="email" name="email" placeholder="you@email.com"></div>
-            <div class="form-group"><label>Device Type *</label>
-              <select name="device" required>
+            <div class="form-group"><label for="booking-email">Email (optional)</label><input id="booking-email" type="email" name="email" autocomplete="email" placeholder="you@email.com"></div>
+            <div class="form-group"><label for="booking-device">Device Type *</label>
+              <select id="booking-device" name="device" required>
                 <option value="">Select device</option>
                 <option value="laptop">Laptop</option>
                 <option value="desktop">Desktop / PC</option>
@@ -134,9 +134,9 @@
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label>Brand / Model</label><input type="text" name="brand" placeholder="e.g. Dell Latitude 5490"></div>
-            <div class="form-group"><label>Service Needed *</label>
-              <select name="service" required>
+            <div class="form-group"><label for="booking-brand">Brand / Model</label><input id="booking-brand" type="text" name="brand" placeholder="e.g. Dell Latitude 5490"></div>
+            <div class="form-group"><label for="booking-service">Service Needed *</label>
+              <select id="booking-service" name="service" required>
                 <option value="">Select service</option>
                 <option value="hardware">Hardware Repair</option>
                 <option value="data-recovery">Data Recovery</option>
@@ -150,19 +150,19 @@
               </select>
             </div>
           </div>
-          <div class="form-group"><label>Describe the Problem *</label><textarea name="issue" rows="4" required placeholder="Screen cracked, won't charge..."></textarea></div>
+          <div class="form-group"><label for="booking-issue">Describe the Problem *</label><textarea id="booking-issue" name="issue" rows="4" required placeholder="Screen cracked, won't charge..."></textarea></div>
           <div class="form-row">
-            <div class="form-group"><label>Preferred Branch *</label>
-              <select name="branch" required>
+            <div class="form-group"><label for="booking-branch">Preferred Branch *</label>
+              <select id="booking-branch" name="branch" required>
                 <option value="">Select branch</option>
                 <option value="cbd">Nairobi CBD – Koja Popman House A105</option>
                 <option value="ngara">Ngara Equity – Nyayo Market Shop 292/293/294</option>
               </select>
             </div>
-            <div class="form-group"><label>Preferred Date</label><input type="date" name="preferred_date"></div>
+            <div class="form-group"><label for="booking-date">Preferred Date</label><input id="booking-date" type="date" name="preferred_date"></div>
           </div>
-          <div class="form-group"><label>Preferred Time</label>
-            <select name="time">
+          <div class="form-group"><label for="booking-time">Preferred Time</label>
+            <select id="booking-time" name="time">
               <option value="">Any time</option>
               <option value="morning">Morning (9am – 12pm)</option>
               <option value="afternoon">Afternoon (12pm – 4pm)</option>
@@ -171,12 +171,6 @@
           </div>
           <button type="submit" class="btn btn-primary" style="width:100%;margin-top:10px;">Submit Booking Request</button>
         </form>
-        <div class="form-success">
-          <div class="icon">OK</div>
-          <h3>Booking Received!</h3>
-          <p>Your reference: <strong class="booking-ref">MS-000000</strong></p>
-          <a href="index.html" class="btn btn-outline" style="margin-top:24px;">Back to Home</a>
-        </div>
       </div>
     </div>
   </section>

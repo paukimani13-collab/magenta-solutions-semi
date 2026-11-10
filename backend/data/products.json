@@ -8,7 +8,8 @@
     "badge": "Ex-UK",
     "imageUrl": "",
     "description": "",
-    "inStock": true
+    "inStock": true,
+    "stockStatus": "in-stock"
   },
   {
     "id": "p2",
@@ -19,7 +20,8 @@
     "badge": "Popular",
     "imageUrl": "",
     "description": "",
-    "inStock": true
+    "inStock": true,
+    "stockStatus": "in-stock"
   },
   {
     "id": "p3",
@@ -30,7 +32,8 @@
     "badge": "Ex-UK",
     "imageUrl": "",
     "description": "",
-    "inStock": true
+    "inStock": true,
+    "stockStatus": "in-stock"
   },
   {
     "id": "p4",
@@ -41,7 +44,8 @@
     "badge": "Apple",
     "imageUrl": "",
     "description": "",
-    "inStock": true
+    "inStock": true,
+    "stockStatus": "in-stock"
   },
   {
     "id": "p5",
@@ -52,7 +56,8 @@
     "badge": "Desktop",
     "imageUrl": "",
     "description": "",
-    "inStock": true
+    "inStock": true,
+    "stockStatus": "in-stock"
   },
   {
     "id": "p6",
@@ -63,7 +68,8 @@
     "badge": "New",
     "imageUrl": "",
     "description": "",
-    "inStock": true
+    "inStock": true,
+    "stockStatus": "in-stock"
   },
   {
     "id": "p7",
@@ -74,7 +80,8 @@
     "badge": "Upgrade",
     "imageUrl": "",
     "description": "",
-    "inStock": true
+    "inStock": true,
+    "stockStatus": "in-stock"
   },
   {
     "id": "p8",
@@ -85,7 +92,8 @@
     "badge": "Upgrade",
     "imageUrl": "",
     "description": "",
-    "inStock": true
+    "inStock": true,
+    "stockStatus": "in-stock"
   },
   {
     "id": "p9",
@@ -96,7 +104,8 @@
     "badge": "",
     "imageUrl": "",
     "description": "",
-    "inStock": true
+    "inStock": true,
+    "stockStatus": "in-stock"
   },
   {
     "id": "p10",
@@ -107,7 +116,8 @@
     "badge": "",
     "imageUrl": "",
     "description": "",
-    "inStock": true
+    "inStock": true,
+    "stockStatus": "in-stock"
   },
   {
     "id": "p11",
@@ -118,7 +128,8 @@
     "badge": "Ex-UK",
     "imageUrl": "",
     "description": "",
-    "inStock": true
+    "inStock": true,
+    "stockStatus": "in-stock"
   },
   {
     "id": "p12",
@@ -129,6 +140,7 @@
     "badge": "From 6.5K",
     "imageUrl": "",
     "description": "",
-    "inStock": true
+    "inStock": true,
+    "stockStatus": "in-stock"
   }
 ]

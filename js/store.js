@@ -108,7 +108,12 @@ function renderProducts(filter = currentFilter) {
   grid.innerHTML = filtered.map(product => {
     const category = getProductCategory(product);
     const categoryLabel = window.MAGENTA_CATEGORIES.find(item => item.value === category)?.label || category;
-    const inStock = product.inStock !== false;
+    const stockStatus = product.stockStatus || (
+      product.inStock === false ? 'out-of-stock' : String(product.badge || '').trim().toLocaleLowerCase() === 'new stock'
+        ? 'new-stock'
+        : 'in-stock'
+    );
+    const inStock = stockStatus !== 'out-of-stock';
     const image = product.imageUrl
       ? `<img class="product-photo" src="${escapeHtml(window.MagentaApi.assetUrl(product.imageUrl))}" alt="${escapeHtml(product.name)}" loading="lazy">`
       : `<div class="photo-placeholder product-photo-placeholder" role="img" aria-label="Photo space for ${escapeHtml(product.name)}"><span>Product photo</span></div>`;
@@ -120,7 +125,7 @@ function renderProducts(filter = currentFilter) {
           <p class="product-specs">${escapeHtml(categoryLabel)}${getProductBrand(product) !== 'Other' ? ` · ${escapeHtml(getProductBrand(product))}` : ''}</p>
           <p class="product-specs">${escapeHtml(product.specs)}</p>
           ${product.description ? `<p class="product-description">${escapeHtml(product.description)}</p>` : ''}
-          <p class="product-stock-status${inStock ? '' : ' is-out-of-stock'}">${inStock ? 'In stock' : 'Out of stock'}</p>
+          <p class="product-stock-status${inStock ? '' : ' is-out-of-stock'}">${stockStatus === 'new-stock' ? 'New stock' : inStock ? 'In stock' : 'Out of stock'}</p>
           <div class="product-footer">
             <div class="product-price">Ksh ${Number(product.price).toLocaleString()}</div>
             <button class="btn btn-primary btn-sm add-to-cart-btn" type="button" data-product="${escapeHtml(JSON.stringify(product))}"${inStock ? '' : ' disabled'}>${inStock ? 'Add to Cart' : 'Out of Stock'}</button>

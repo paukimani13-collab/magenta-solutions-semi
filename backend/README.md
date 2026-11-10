@@ -58,6 +58,8 @@ The Node.js server exposes the public inventory API and accepts protected produc
 4. On Windows, run `npm run start:local`. The script generates a temporary admin token and prints it in the terminal. Keep the terminal open while using the site. On macOS/Linux, set a private `ADMIN_TOKEN` of at least 32 characters and run `npm start`.
 5. Open `http://127.0.0.1:3000/admin.html`, leave the API base URL empty, and unlock stock management with the token printed by the local startup script. Open the store at `http://127.0.0.1:3000/store.html`.
 
+The site automatically uses its same-origin API on `localhost` and `127.0.0.1` when no API URL is configured. On the published site, it uses Supabase unless `MAGENTA_API_BASE_URL` is set to an alternate backend.
+
 The token is never saved in browser storage. The browser sends it only as a bearer token when using the protected admin actions. The store can be browsed without it.
 
 Do not open `admin.html` or `store.html` directly as a `file://` URL. The backend serves the frontend pages and `/api/products` on the same origin, so use the `http://127.0.0.1:3000` addresses above for local use.
