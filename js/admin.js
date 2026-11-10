@@ -254,10 +254,11 @@ function editStock(id) {
   form.elements.description.value = product.description || '';
   form.elements.category.value = product.category;
   const badge = String(product.badge || '').trim().toLocaleLowerCase();
-  form.elements.badge.value = badge === 'new' || badge === 'new stock' ? '' : (product.badge || '');
-  form.elements.stockStatus.value = product.stockStatus || (
+  const stockStatus = product.stockStatus || (
     product.inStock === false ? 'out-of-stock' : (badge === 'new' || badge === 'new stock' ? 'new-stock' : 'in-stock')
   );
+  form.elements.stockStatus.value = stockStatus;
+  form.elements.badge.value = stockStatus === 'new-stock' ? '' : (product.badge || '');
   form.elements.image.value = '';
   form.elements.image.required = false;
   document.getElementById('product-image-required').hidden = true;
