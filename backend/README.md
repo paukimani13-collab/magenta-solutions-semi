@@ -15,7 +15,7 @@ The website can use Supabase Postgres for products, Supabase Storage for product
 3. Apply the database migration and deploy the function:
 
    ```powershell
-   npx supabase db push
+   npx supabase db push --remote
    npx supabase functions deploy inventory
    ```
 
