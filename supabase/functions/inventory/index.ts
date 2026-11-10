@@ -187,7 +187,7 @@ async function handleRequest(request: Request): Promise<Response> {
   if (request.method === "OPTIONS") return new Response(null, { status: 204, headers });
 
   const url = new URL(request.url);
-  const route = url.pathname.replace(/^\/functions\/v1\/inventory/, "") || "/";
+  const route = url.pathname.replace(/^\/(?:functions\/v1\/)?inventory(?=\/|$)/, "") || "/";
   if (request.method === "GET" && route === "/api/products") {
     const { data, error } = await supabase.from("products").select("*").order("created_at", { ascending: false });
     if (error) throw error;
