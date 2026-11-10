@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Stock Management | Magenta Solutions</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a href="index.html" class="logo"><img class="brand-logo" src="logos/MagentaLogo.png" alt=""><span>MAGENTA COMPUTERS</span></a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="store.html">Store</a>
+      </nav>
+      <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="hero" style="min-height:35vh;padding-top:100px;padding-bottom:40px;">
+    <div class="container" style="text-align:center;">
+      <h1 class="section-title">Stock Management</h1>
+      <p class="section-subtitle">Private tools for managing the public store catalogue.</p>
+    </div>
+  </section>
+
+  <main class="section" style="padding-top:20px;">
+    <div class="container">
+      <section class="admin-panel">
+        <h2>Connect to inventory</h2>
+        <p class="photo-guidance">Configure Supabase in js/api-config.js for the hosted store. For local use, start the Node.js backend and open this page at http://127.0.0.1:3000/admin.html; leave the API URL blank so the site and API share one origin. The URL override is saved only in this browser.</p>
+        <div class="form-group">
+          <label for="api-url">API or Supabase project URL</label>
+          <div class="form-row">
+            <input id="api-url" type="url" placeholder="https://your-api.example.com" autocomplete="url">
+            <button id="save-api-url" class="btn btn-outline btn-sm" type="button">Save API URL</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="admin-token">Admin token</label>
+          <div class="form-row">
+            <input id="admin-token" type="password" autocomplete="current-password" required>
+            <button id="unlock-admin" class="btn btn-primary btn-sm" type="button">Unlock</button>
+            <button id="lock-admin" class="btn btn-outline btn-sm" type="button" hidden>Lock</button>
+          </div>
+        </div>
+        <p class="photo-guidance">Your admin token is kept in memory only. Product photos must be JPEG, PNG, or WebP and 5 MB or smaller.</p>
+        <p id="admin-status" class="photo-guidance" role="status" aria-live="polite">Connect to the API to load inventory.</p>
+      </section>
+
+      <section id="stock-controls" class="admin-panel" hidden>
+        <h2>Add or edit products</h2>
+        <form id="stock-form" enctype="multipart/form-data">
+          <div class="form-row">
+            <div class="form-group"><label for="product-name">Product name *</label><input id="product-name" type="text" name="name" maxlength="120" required></div>
+            <div class="form-group"><label for="product-brand">Brand</label><input id="product-brand" type="text" name="brand" maxlength="60" placeholder="e.g. Dell, HP, Lenovo"></div>
+            <div class="form-group"><label for="product-price">Price (Ksh) *</label><input id="product-price" type="number" name="price" required min="1" max="100000000" step="1"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="product-specs">Specs *</label><input id="product-specs" type="text" name="specs" maxlength="500" required></div>
+            <div class="form-group"><label for="product-category">Category *</label>
+              <select id="product-category" name="category" required>
+                <option value="">Choose a category</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group"><label for="product-description">Product details</label><textarea id="product-description" name="description" maxlength="1000" rows="3" placeholder="Additional condition, included accessories, warranty, or other helpful details"></textarea></div>
+          <div class="form-row">
+            <div class="form-group"><label for="product-badge">Badge</label><input id="product-badge" type="text" name="badge" maxlength="40" placeholder="Ex-UK / New"></div>
+            <div class="form-group"><label for="product-in-stock">Availability *</label>
+              <select id="product-in-stock" name="inStock" required>
+                <option value="true">In stock</option>
+                <option value="false">Out of stock</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group"><label for="product-image">Product photo <span id="product-image-required">*</span></label><input id="product-image" type="file" name="image" accept="image/jpeg,image/png,image/webp" required></div>
+          <div class="stock-management-controls">
+            <button id="stock-submit" class="btn btn-primary btn-sm" type="submit">Post product</button>
+            <button id="cancel-edit" class="btn btn-outline btn-sm" type="button" hidden>Cancel edit</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="admin-inventory" aria-labelledby="inventory-title">
+        <div class="admin-inventory-heading">
+          <div>
+            <h2 id="inventory-title">Product catalogue</h2>
+            <p id="inventory-result-count" class="photo-guidance" aria-live="polite">Loading products…</p>
+          </div>
+          <button id="reload-inventory" class="btn btn-outline btn-sm" type="button">Refresh inventory</button>
+        </div>
+        <div class="inventory-summary" aria-label="Inventory summary">
+          <div class="inventory-stat"><span>Total products</span><strong id="inventory-total">0</strong></div>
+          <div class="inventory-stat"><span>In stock</span><strong id="inventory-in-stock">0</strong></div>
+          <div class="inventory-stat"><span>Out of stock</span><strong id="inventory-out-of-stock">0</strong></div>
+        </div>
+        <div class="inventory-filters">
+          <div class="form-group">
+            <label for="inventory-search">Search products</label>
+            <input id="inventory-search" type="search" placeholder="Search name, brand, or specs">
+          </div>
+          <div class="form-group">
+            <label for="inventory-category">Category</label>
+            <select id="inventory-category">
+              <option value="">All categories</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="inventory-availability">Availability</label>
+            <select id="inventory-availability">
+              <option value="">All products</option>
+              <option value="in-stock">In stock</option>
+              <option value="out-of-stock">Out of stock</option>
+            </select>
+          </div>
+          <button id="clear-inventory-filters" class="btn btn-outline btn-sm" type="button">Clear filters</button>
+        </div>
+      </section>
+      <div class="products-grid" id="products-grid"></div>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="container"><div class="footer-bottom"><span>&copy; 2026 Magenta Solutions Limited.</span></div></div></footer>
+  <script src="js/main.js"></script>
+  <script src="js/api-config.js"></script>
+  <script src="js/categories.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

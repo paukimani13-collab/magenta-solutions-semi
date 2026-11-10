@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Locations | Magenta Solutions Limited</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a href="index.html" class="logo"><img class="brand-logo" src="logos/MagentaLogo.png" alt=""><span>MAGENTA COMPUTERS</span></a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a><a href="services.html">Services</a><a href="store.html">Store</a>
+        <a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html" class="active">Contact</a>
+        <a href="services.html#booking" class="btn btn-primary btn-sm nav-cta">Book Repair</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="cart-btn" aria-label="Open cart"><svg class="cart-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 1.9-1.4L22 9H6"/><circle cx="10" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg><span class="cart-count" style="display:none">0</span></button>
+        <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" style="min-height:40vh;padding-top:100px;padding-bottom:50px;">
+    <div class="container" style="text-align:center;">
+      <h1 class="section-title">Contact & Locations</h1>
+      <p class="section-subtitle" style="margin-bottom:0;">Two branches in Nairobi.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info-card">
+          <h3>Branch 1 – Nairobi CBD</h3>
+          <div class="contact-item"><div class="icon">1</div><div><strong>Koja Popman House</strong><br>1st Floor, Room A105<br>Nairobi CBD</div></div>
+          <div class="contact-item"><div class="icon">P</div><div><a href="tel:0703344902">Paul: 0703 344 902</a><br><a href="tel:0722446031">0722 446 031</a></div></div>
+          <div class="contact-item"><div class="icon">H</div><div>Mon – Sat: 8:30 AM – 6:00 PM<br>Sunday: Closed</div></div>
+          <a class="btn btn-outline btn-sm" href="https://maps.google.com/?q=Koja+Popman+House+Nairobi" target="_blank" rel="noopener">Open in Google Maps</a>
+        </div>
+        <div class="contact-info-card">
+          <h3>Branch 2 – Ngara</h3>
+          <div class="contact-item"><div class="icon">2</div><div><strong>Ngara Equity – Nyayo Market</strong><br>Shop 292 / 293 / 294<br>Ngara, Nairobi</div></div>
+          <div class="contact-item"><div class="icon">P</div><div><a href="tel:0705412146">Alvince Oliech: 0705 412 146</a><br><a href="tel:0703344902">Paul: 0703 344 902</a></div></div>
+          <div class="contact-item"><div class="icon">H</div><div>Mon – Sat: 8:30 AM – 6:00 PM<br>Sunday: Closed</div></div>
+          <a class="btn btn-outline btn-sm" href="https://maps.google.com/?q=Nyayo+Market+Ngara+Nairobi" target="_blank" rel="noopener">Open in Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Send a Message</h2>
+      <div class="booking-form" style="max-width:600px;">
+        <form onsubmit="event.preventDefault(); showToast('Message sent! We will reply soon.'); this.reset();">
+          <div class="form-group"><label>Name *</label><input type="text" name="name" required></div>
+          <div class="form-group"><label>Phone *</label><input type="tel" name="phone" required></div>
+          <div class="form-group"><label>Message *</label><textarea name="message" rows="4" required></textarea></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer"><div class="container"><div class="footer-bottom"><span>&copy; 2026 Magenta Solutions Limited.</span></div></div></footer>
+  <div class="cart-overlay"></div>
+  <div class="cart-sidebar">
+    <div class="cart-header"><h3>Your Cart</h3><button class="cart-close">×</button></div>
+    <div class="cart-items"></div>
+    <div class="cart-footer"><div class="cart-total"><span>Total</span><span class="cart-total-value">Ksh 0</span></div><button class="btn btn-primary" style="width:100%" onclick="checkout()">Checkout</button></div>
+  </div>
+  <a class="whatsapp-float" href="https://wa.me/254703344902" target="_blank" rel="noopener noreferrer" aria-label="Chat with Paul on WhatsApp" title="Chat with Paul on WhatsApp">
+    <img src="logos/whatsapp%20(1).JPEG" alt="">
+  </a>
+  <script src="js/main.js"></script>
+</body>
+</html>

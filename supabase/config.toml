@@ -1,0 +1,2 @@
+[functions.inventory]
+verify_jwt = false

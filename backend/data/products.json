@@ -1,0 +1,134 @@
+[
+  {
+    "id": "p1",
+    "name": "Dell Latitude 5490",
+    "specs": "Intel i5 · 8GB RAM · 256GB SSD · 14\" FHD · Ex-UK",
+    "price": 18500,
+    "category": "laptops",
+    "badge": "Ex-UK",
+    "imageUrl": "",
+    "description": "",
+    "inStock": true
+  },
+  {
+    "id": "p2",
+    "name": "HP EliteBook 840 G5",
+    "specs": "Intel i7 · 16GB RAM · 512GB SSD · 14\" · Ex-UK",
+    "price": 28500,
+    "category": "laptops",
+    "badge": "Popular",
+    "imageUrl": "",
+    "description": "",
+    "inStock": true
+  },
+  {
+    "id": "p3",
+    "name": "Lenovo ThinkPad T480",
+    "specs": "Intel i5 · 8GB RAM · 256GB SSD · 14\" · Ex-UK",
+    "price": 19500,
+    "category": "laptops",
+    "badge": "Ex-UK",
+    "imageUrl": "",
+    "description": "",
+    "inStock": true
+  },
+  {
+    "id": "p4",
+    "name": "MacBook Air 2017",
+    "specs": "Intel i5 · 8GB RAM · 128GB SSD · 13\" · Ex-UK",
+    "price": 32000,
+    "category": "laptops",
+    "badge": "Apple",
+    "imageUrl": "",
+    "description": "",
+    "inStock": true
+  },
+  {
+    "id": "p5",
+    "name": "Dell OptiPlex Desktop",
+    "specs": "Intel i5 · 8GB RAM · 500GB HDD · Complete Set",
+    "price": 14500,
+    "category": "all-in-ones",
+    "badge": "Desktop",
+    "imageUrl": "",
+    "description": "",
+    "inStock": true
+  },
+  {
+    "id": "p6",
+    "name": "Acer Aspire 5 (New)",
+    "specs": "Ryzen 5 · 8GB RAM · 512GB SSD · 15.6\" · New",
+    "price": 45000,
+    "category": "laptops",
+    "badge": "New",
+    "imageUrl": "",
+    "description": "",
+    "inStock": true
+  },
+  {
+    "id": "p7",
+    "name": "8GB DDR4 RAM Module",
+    "specs": "DDR4 2666MHz · Compatible with most laptops",
+    "price": 3500,
+    "category": "accessories",
+    "badge": "Upgrade",
+    "imageUrl": "",
+    "description": "",
+    "inStock": true
+  },
+  {
+    "id": "p8",
+    "name": "256GB NVMe SSD",
+    "specs": "PCIe Gen3 · High-speed · Laptop upgrade",
+    "price": 4500,
+    "category": "accessories",
+    "badge": "Upgrade",
+    "imageUrl": "",
+    "description": "",
+    "inStock": true
+  },
+  {
+    "id": "p9",
+    "name": "Laptop Backpack",
+    "specs": "15.6\" compatible · Water-resistant",
+    "price": 2500,
+    "category": "accessories",
+    "badge": "",
+    "imageUrl": "",
+    "description": "",
+    "inStock": true
+  },
+  {
+    "id": "p10",
+    "name": "Wireless Mouse + Keyboard",
+    "specs": "Combo set · USB receiver · Quiet keys",
+    "price": 2800,
+    "category": "accessories",
+    "badge": "",
+    "imageUrl": "",
+    "description": "",
+    "inStock": true
+  },
+  {
+    "id": "p11",
+    "name": "HP ProBook 450 G6",
+    "specs": "Intel i5 · 8GB RAM · 256GB SSD · 15.6\" · Ex-UK",
+    "price": 22000,
+    "category": "laptops",
+    "badge": "Ex-UK",
+    "imageUrl": "",
+    "description": "",
+    "inStock": true
+  },
+  {
+    "id": "p12",
+    "name": "Entry Level Laptop",
+    "specs": "Intel Celeron · 4GB RAM · 128GB SSD · 14\" · Ex-UK",
+    "price": 6500,
+    "category": "laptops",
+    "badge": "From 6.5K",
+    "imageUrl": "",
+    "description": "",
+    "inStock": true
+  }
+]

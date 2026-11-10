@@ -1,0 +1,17 @@
+{
+  "name": "magenta-computers-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Magenta Computers website and inventory backend",
+  "scripts": {
+    "start": "node backend/server.js",
+    "start:local": "powershell -NoProfile -ExecutionPolicy Bypass -File backend\\start-local.ps1"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "multer": "^2.0.2"
+  }
+}
